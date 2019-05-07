@@ -5,10 +5,9 @@ EXPOSE 443
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
-COPY ["SSAP_CAU/SSAP_CAU.csproj", "SSAP_CAU/"]
-RUN dotnet restore "SSAP_CAU/SSAP_CAU.csproj"
+COPY ["SSAP_CAU.csproj", "."]
+RUN dotnet restore "SSAP_CAU.csproj"
 COPY . .
-WORKDIR "/src/SSAP_CAU"
 RUN dotnet build "SSAP_CAU.csproj" -c Release -o /app
 
 FROM build AS publish
