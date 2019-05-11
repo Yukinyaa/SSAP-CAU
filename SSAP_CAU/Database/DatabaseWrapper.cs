@@ -9,10 +9,10 @@ namespace SSAP_CAU.Database
 {
     public class DatabaseWrapper
     {
-        const string strConn = "Server=db:3306;Database=;Uid=ssapcau;Pwd=2019caucse;";
+        const string strConn = "Server=db;Port=3306;Database=;Uid=ssapcau;Pwd=2019caucse;";
         public const string strCreatePinTable =
 @"create table pin (
-    pinID   INT         AUTO_INCREMENT,
+    pinID   INT         AUTO_INCREMENT, 
     coord   CHAR(30)    NOT NULL,
     reportcnt INT       NOT NULL,
     title   CHAR(30)    NOT NULL,
@@ -63,6 +63,20 @@ namespace SSAP_CAU.Database
             }
             //ds.Tables[0].Rows[0]["Name"];
             return ds;
+        }
+        static public bool TestOpen()
+        {
+            MySqlConnection conn = new MySqlConnection(strConn);
+            try
+            {
+                conn.Open();
+                conn.Close();
+            }
+            catch (MySqlException e)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
