@@ -16,7 +16,10 @@ namespace SSAP_CAU
         public static void Main(string[] args)
         {
             while (!DatabaseWrapper.TestOpen())
-                System.Threading.Thread.Sleep(100);
+            {
+                System.Threading.Thread.Sleep(1000);Console.WriteLine("Waiting For DB...");
+            }
+            
             if (DatabaseWrapper.SendQuery("show tables like \"pin\"").Tables[0].Rows.Count == 0)
                 DatabaseWrapper.SendNonQuery(DatabaseWrapper.strCreatePinTable);
 
