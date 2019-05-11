@@ -9,8 +9,8 @@ namespace SSAP_CAU.Database
 {
     public class DatabaseWrapper
     {
-        const string strConn = "Server=ssapcaudb:3306;Database=;Uid=ssapcau;Pwd=2019caucse;";
-        public const string strCreatePinTable = 
+        const string strConn = "Server=db:3306;Database=;Uid=ssapcau;Pwd=2019caucse;";
+        public const string strCreatePinTable =
 @"create table pin (
     pinID   INT         AUTO_INCREMENT,
     coord   CHAR(30)    NOT NULL,
@@ -65,6 +65,4 @@ namespace SSAP_CAU.Database
             return ds;
         }
     }
-
-
 }

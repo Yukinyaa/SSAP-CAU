@@ -5,7 +5,7 @@ services:
     ports: 
     - "8080:80"
     links:
-     - ssapcaudb
+     - ssapcaudb:db
 
   ssapcaudb:
     image: mysql:5.7
