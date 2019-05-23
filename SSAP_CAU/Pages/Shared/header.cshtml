@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>SSAP</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style>
+
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #555;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .fakeimg {
+            height: 200px;
+            background: #aaa;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1>S S A P</h1>
+        <p>Resize this responsive page to see the effect!</p>
+    </div>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+        <a class="navbar-brand" href="index.jsp">Logo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/place_reg">Place Registration</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/event_reg">Event Registration</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="index.jsp" id="navbardrop" data-toggle="dropdown">
+                        Dropdown link
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" onClick="alert('Work In progress')">장소 보기</a>
+                        <a class="dropdown-item" href="#" onClick="alert('Work In progress')">이벤트 보기</a>
+                        <a class="dropdown-item" href="#" onClick="alert('Work In progress')">옵션 3</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</body>

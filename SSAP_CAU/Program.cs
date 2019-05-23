@@ -15,6 +15,7 @@ namespace SSAP_CAU
     {
         public static void Main(string[] args)
         {
+            /*
             while (!DatabaseWrapper.TestOpen())
             {
                 System.Threading.Thread.Sleep(1000);Console.WriteLine("Waiting For DB...");
@@ -28,7 +29,7 @@ namespace SSAP_CAU
 
             if (DatabaseWrapper.SendQuery("show tables like \"reply\"").Tables[0].Rows.Count == 0)
                 DatabaseWrapper.SendNonQuery(DatabaseWrapper.strCreateReplyTable);
-
+            //*/
             CreateWebHostBuilder(args).Build().Run();
         }
 

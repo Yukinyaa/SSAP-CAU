@@ -1,0 +1,28 @@
+@page
+
+@{
+    Html.RenderPartial("Shared/header.cshtml");
+}
+<div class="container">
+    <form method="post" action="go_to_delete_action_page">
+        <input type="hidden" name="delteId" value="" />
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label for="deleteInputPassword">Password</label>
+                <input type="password" class="form-control" id="deleteInputPassword" placeholder="Please confirm password">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-12 text-right">
+                <button type="submit" class="btn btn-primary text-right">Submit</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+@{
+    Html.RenderPartial("Shared/footer.cshtml");
+}
