@@ -1,16 +1,16 @@
 ﻿version: '3.3'
 services:
   ssapcauweb:
-    build: ./SSAP_CAU
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports: 
     - "8080:80"
     links:
      - ssapcaudb:db
-    depends_on:
-     - ssapcaudb
 
   ssapcaudb:
-    image: mysql:5.7.22
+    image: mysql:5.7
     restart: always
     environment:
       MYSQL_DATABASE: 'SSAPCAU'
@@ -22,10 +22,10 @@ services:
       MYSQL_ROOT_PASSWORD: '2019caucse#'
     ports:
       # <Port exposed> : < MySQL Port running inside container>
-      - '33068:3306'
+      - '33333:3306'
     expose:
       # Opens port 3306 on the container
-      - '3306'
+      - 3306
       # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
