@@ -1,7 +1,9 @@
 ﻿version: '3.3'
 services:
   ssapcauweb:
-    #build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports: 
     - "8080:80"
     links:
