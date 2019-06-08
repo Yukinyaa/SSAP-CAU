@@ -52,7 +52,7 @@ namespace SSAP_CAU
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc();
         }
     }
 }
