@@ -50,10 +50,8 @@ namespace SSAP_CAU
             app.UseCookiePolicy();
 
             app.UseMvc(
-                routes => {
-                    routes.MapRoute(
-                        name: "default",
-                        template: "{controller=Go_to_action_page}/{action=Index}/{id?}");
+                routes => {;
+                    routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 });
         }
     }
