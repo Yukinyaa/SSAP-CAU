@@ -1,5 +1,5 @@
 @page
-
+@using System
 @{
     Response.ContentType = "text/xml";
 }
@@ -7,10 +7,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <marker>
-    @DatabaseWrapper.SendQuery("select * from pin;").GetXml();
-    
-    @*@foreach(var item in DatabaseWrapper.SendQuery("select * from pin;").Tables[0].Rows)
+
+    @foreach(System.Data.DataRow item in DatabaseWrapper.SendQuery("select * from pin;").Tables[0].Rows)
     {
         <marker id='@item["pinID"]' name='@item["title"]' address='@item["addr"]' lat='@item["coordlat"]' lng='@item["coording"]' type='@item["pinID"]==1?"place":"event"' />
-    }-->*@
+    }-->
 </marker>
