@@ -15,7 +15,7 @@ namespace SSAP_CAU
     {
         public static void Main(string[] args)
         {
-            //*
+            /*
             while (!DatabaseWrapper.TestOpen())
             {
                 System.Threading.Thread.Sleep(1000);Console.WriteLine("Waiting For DB...");
