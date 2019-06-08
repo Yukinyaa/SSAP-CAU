@@ -11,5 +11,5 @@
     @foreach(System.Data.DataRow item in DatabaseWrapper.SendQuery("select * from pin;").Tables[0].Rows)
     {
         <marker id='@item["pinID"]' name='@item["title"]' address='@item["addr"]' lat='@item["coordlat"]' lng='@item["coording"]' type='@item["pinID"]==1?"place":"event"' />
-    }-->
+    }
 </marker>
