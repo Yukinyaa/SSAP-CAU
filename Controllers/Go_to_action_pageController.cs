@@ -22,8 +22,8 @@ namespace SSAP_CAU.Controllers
                 register.inputcontext + "," +//content TEXT(65535),
                 register.inputName + "," +//writer CHAR(100),       
                 register.inputPassword + "," +//password CHAR(30),
-                "" + "," +//startdate DATETIME,
-                "" + "," +//enddate DATETIME,
+                "NULL" + "," +//startdate DATETIME,
+                "NULL" + "" +//enddate DATETIME,
                 ");"
             );
 
