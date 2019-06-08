@@ -7,10 +7,61 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\delete_form.cshtml" />
+    <Content Remove="Pages\detail.cshtml" />
+    <Content Remove="Pages\event_reg.cshtml" />
+    <Content Remove="Pages\index.cshtml" />
+    <Content Remove="Pages\marker.cshtml" />
+    <Content Remove="Pages\place_reg.cshtml" />
+    <Content Remove="Pages\Shared\footer.cshtml" />
+    <Content Remove="Pages\Shared\header.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\delete_form.cshtml" />
+    <None Include="Pages\detail.cshtml" />
+    <None Include="Pages\event_reg.cshtml" />
+    <None Include="Pages\index.cshtml" />
+    <None Include="Pages\marker.cshtml" />
+    <None Include="Pages\place_reg.cshtml" />
+    <None Include="Pages\Shared\footer.cshtml" />
+    <None Include="Pages\Shared\header.cshtml" />
+    <None Include="wwwroot\css\ssap.css" />
+    <None Include="wwwroot\img\banner.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\img\event1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\img\event2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\img\event3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\img\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\img\place1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\img\place2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\img\place3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.10" />
     <PackageReference Include="MySql.Data" Version="8.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\css\" />
   </ItemGroup>
 
 </Project>

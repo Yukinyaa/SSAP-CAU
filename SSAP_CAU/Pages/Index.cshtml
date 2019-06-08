@@ -4,11 +4,213 @@
     Html.RenderPartial("Shared/header.cshtml");
 }
 
-<div class="container" id="index" style="height:200px;">
+<body>
+    <script>
+		var map;
+		var zoomOpt = { minZoom : 6, maxZoom : 16};
+		var infoWindowEmptyLocation;
 
-    <p style="font-size:56px">GoogleMap API</p>
+		var markerList = [];
 
-</div>
+		// sample (아이콘 색상 변경으로 고쳐야함)
+		var customLabel = {
+				place : {
+					url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+
+				},
+				event : {
+					url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+				}
+		};
+
+		// 빈 장소 클릭으로 생성된 마커 popup
+		var contentString = "<div class='container'>"+
+								"<div class='form-group'>"+
+									"<a class='btn btn-primary my-2 my-sm-0' href='place_reg' role='button'>Write Place</a>"+
+									"<a class='btn btn-success my-2 my-sm-0' href='event_reg' role='button'>Write Event</a>"+
+								"</div>"+
+							"</div>";
+
+		function initMap() {
+			//맵 초기 설정
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: {lat: 37.505014, lng: 126.957375},
+				zoom: 16,
+				maxZoom : 18,
+				minZoom : 16
+			});
+
+			//맵 클릭 이벤트 추가
+			map.addListener('click', function(e){
+				placeMarkerAndPanTo(e.latLng, map);
+			});
+
+			//주소 -> 좌표 변환
+			var geocoder = new google.maps.Geocoder();
+
+			document.getElementById('search').addEventListener('click', function() {
+				geocodeAddress(geocoder, map);
+			});
+
+			//DB에서 읽어온 정보를 해당 마커에 보여줄 infoWindow
+			var infoWindow = new google.maps.InfoWindow;
+
+			//빈 곳을 클릭하면 등록 페이지로 연결시켜줄 화면을 보여줄 infoWindow
+			infoWindowEmptyLocation = new google.maps.InfoWindow({
+				content: contentString
+			});
+
+			// DB xml파일 읽어와서 마커로 뿌려주기
+   			// Change this depending on the name of your PHP or XML file
+   			// test with google example : https://storage.googleapis.com/mapsdevsite/json/mapmarkers2.xml
+			downloadUrl('marker', function(data) {
+				var xml = data.responseXML;
+				var markers = xml.documentElement.getElementsByTagName('marker');
+				Array.prototype.forEach.call(markers, function(markerElem) {
+					var id = markerElem.getAttribute('id');
+        			var name = markerElem.getAttribute('name');
+        			var address = markerElem.getAttribute('address');
+        			var type = markerElem.getAttribute('type');
+        			var point = new google.maps.LatLng(
+            			parseFloat(markerElem.getAttribute('lat')),
+            			parseFloat(markerElem.getAttribute('lng')));
+
+
+        			/*
+        			var infowincontent = document.createElement('div');
+        			var strong = document.createElement('strong');
+        			strong.textContent = name
+        			infowincontent.appendChild(strong);
+        			infowincontent.appendChild(document.createElement('br'));
+
+        			var text = document.createElement('text');
+        			text.textContent = address
+        			infowincontent.appendChild(text);
+        			*/
+
+        			var infowincontent = "<div class='container'>"+
+									 		"<div class='form-group'>"+
+									 			"<div class='row'>"+
+									 				"<h3>"+name+"</h3>"+
+									 			"</div>"+
+									 			"<div class='row'>"+
+									 				"<h5>"+address+"</h5>"+
+									 			"</div>"+
+									 			//버튼을 누르면 해당 id를 가진 detail 페이지로 이동하기.
+									 			"<div class='row'>"+
+									 				"<div class='col'>"+
+									 					"<a class='btn btn-primary my-2 my-sm-0' href='detail/id' role='button'>Detail</a>"+
+									 				"</div>"+
+									 			"</div>"+
+									 		"</div>"+
+										 "</div>";
+
+        			var icon = customLabel[type] || {};
+        			var marker = new google.maps.Marker({
+          				map: map,
+	          			position: point,
+	          			category: type,
+	          			title: name,
+    	      			icon: icon.url
+        			});
+
+        			markerList.push(marker);
+
+        			marker.addListener('click', function() {
+          				infoWindow.setContent(infowincontent);
+          				infoWindow.open(map, marker);
+        			});
+      			});
+			});
+		}
+
+		function downloadUrl(url, callback) {
+ 			var request = window.ActiveXObject ?
+ 			new ActiveXObject('Microsoft.XMLHTTP') :
+			new XMLHttpRequest;
+
+			request.onreadystatechange = function() {
+				if (request.readyState == 4) {
+					request.onreadystatechange = doNothing;
+					callback(request, request.status);
+				}
+			};
+
+			request.open('GET', url, true);
+			request.send(null);
+		}
+
+		function doNothing() {}
+
+
+		//주소 검색으로 마커 나타내기
+		function geocodeAddress(geocoder, resultsMap) {
+			var address = document.getElementById('address').value;
+			geocoder.geocode({'address': address}, function(results, status) {
+				if (status === 'OK') {
+					resultsMap.setCenter(results[0].geometry.location);
+					var marker = new google.maps.Marker({
+						map: resultsMap,
+						position: results[0].geometry.location
+					});
+
+					marker.addListener('click', function(){
+						//position 정보를 가지고 registration page로 넘어가야함.
+						infoWindowEmptyLocation.open(map, marker);
+					});
+
+				} else {
+					alert('Geocode was not successful for the following reason: ' + status);
+				}
+			});
+		}
+
+
+
+		//빈 곳 클릭 후 마커안에 등록 바로가기 버튼 표시해주기
+		function placeMarkerAndPanTo(latLng, map){
+			var marker = new google.maps.Marker({
+				position : latLng,
+				map : map
+			});
+			map.panTo(latLng);
+
+			marker.addListener('click', function(){
+				//position 정보를 가지고 registration page로 넘어가야함.
+				infoWindowEmptyLocation.open(map, marker);
+			});
+
+		}
+
+		filterMarkers = function(category) {
+
+			var bounds = new google.maps.LatLngBounds();
+			for (i = 0; i < markerList.length; i++) {
+				marker = markerList[i];
+
+				// If is same category or category not picked
+				if(marker.category == category || category.length == 0) {
+
+					marker.setVisible(true);
+					bounds.extend(marker.getPosition());
+				}
+				// Categories don't match
+				else {
+					marker.setVisible(false);
+				}
+				map.fitBounds(bounds);
+			}
+		}
+    </script>
+
+
+    <div class="index-container">
+
+        <div id="map"></div>
+    </div>
+</body>
+
+
 
 
 @{
