@@ -7,7 +7,6 @@ WORKDIR /src
 COPY ["./SSAP_CAU.csproj", "."]
 RUN dotnet restore "SSAP_CAU.csproj"
 COPY . .
-WORKDIR "/src/SSAP_CAU"
 RUN dotnet build "SSAP_CAU.csproj" -c Release -o /app
 
 FROM build AS publish
