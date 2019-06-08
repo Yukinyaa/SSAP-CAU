@@ -13,10 +13,12 @@ namespace SSAP_CAU.Database
         public const string strCreatePinTable =
 @"create table pin (
     pinID   INT         AUTO_INCREMENT, 
-    coord   CHAR(30)    NOT NULL,
+    coordlat   FLOAT    NOT NULL,
+    coording   FLOAT    NOT NULL,
     reportcnt INT       NOT NULL,
     title   CHAR(30)    NOT NULL,
     type    INT         NOT NULL,
+    addr TEXT(65535),
     content TEXT(65535),
     writer CHAR(100),
     password CHAR(30),

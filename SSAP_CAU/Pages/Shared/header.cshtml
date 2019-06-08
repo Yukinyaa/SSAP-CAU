@@ -1,64 +1,70 @@
-﻿<!DOCTYPE html>
 <head>
-    <title>SSAP</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <style>
-
-        footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #555;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .fakeimg {
-            height: 200px;
-            background: #aaa;
-        }
-    </style>
-
+	<title>SSAP</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<link rel="stylesheet" href="~/css/ssap.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD38rxvxx56XQ2iVDHPoeW41tKfwlSpEd0&callback=initMap" async defer></script>
+	
 </head>
+ 
 <body>
 
-    <div class="jumbotron text-center" style="margin-bottom:0">
-        <h1>S S A P</h1>
-        <p>Resize this responsive page to see the effect!</p>
-    </div>
+	<div class="jumbotron text-center" style="margin-bottom:0" id="top_banner">
+	  <h1 class="text-center">S S A P</h1>
+	  <h4 class="text-center"><span id="subtitle">S</span>ocial <span id="subtitle">S</span>ystem m<span id="subtitle">AP</span> of CAU</h4> 
+	</div>
+	
+	<nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
+		<a class="navbar-brand" href="index"><img src='@Url.Content("img/logo.png")' alt="ssap logo"/></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="place_reg">Place Registration</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="event_reg">Event Registration</a>
+				</li>
+				<li class="nav-item">
+					<select class="form-control" id="type" onchange="filterMarkers(this.value);">
+						<option value="">Map Category Filter</option>
+						<option value="place">Place</option>
+						<option value="event">Event</option>
+						<option value="">All</option>
+					</select>   
+				</li>
+			</ul>
+		</div>
+  		<div class="form-inline">
+			
+  			<input class="form-control mr-sm-2" type="search" id="address" placeholder="서울특별시 동작구 흑석로 84" aria-label="Search">
+  			
+  			<button class="btn btn-outline-success my-2 my-sm-0" id="search"><i class="fa fa-search"></i></button>
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-        <a class="navbar-brand" href="index.jsp">Logo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/place_reg">Place Registration</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/event_reg">Event Registration</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="index.jsp" id="navbardrop" data-toggle="dropdown">
-                        Dropdown link
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#" onClick="alert('Work In progress')">장소 보기</a>
-                        <a class="dropdown-item" href="#" onClick="alert('Work In progress')">이벤트 보기</a>
-                        <a class="dropdown-item" href="#" onClick="alert('Work In progress')">옵션 3</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
+  		</div>
+	  	
+	  	
+	</nav>
+	
+	<div class="icon-bar">
+		<a href="#" target="_top" class="chevron-up" data-toggle="tooltip" data-placement="right" title="Go top"><i class="fas fa-chevron-up"></i></a> 
+		<a href="index" class="chevron-up" data-toggle="tooltip" data-placement="right" title="Home"><i class="fas fa-home"></i></a>
+		<a href="https://github.com/Yukinyaa/SSAP-CAU/issues" class="exclamation-circle" data-toggle="tooltip" data-placement="right" title="Report"><i class="fas fa-exclamation-circle"></i></a> 
+		<a href="https://github.com/Yukinyaa/SSAP-CAU" class="git-square" data-toggle="tooltip" data-placement="right" title="GitHub"><i class="fab fa-git-square"></i></a>
+		<a href="#end-page" class="chevron-down" data-toggle="tooltip" data-placement="right" title="Go end"><i class="fas fa-chevron-down"></i></a> 
+	</div>
+	
+	<script>
+		$(document).ready(function(){
+  			$('[data-toggle="tooltip"]').tooltip(); 
+		});
+	</script>
+	
 </body>

@@ -1,0 +1,137 @@
+﻿@charset "UTF-8";
+
+/*overall css*/
+body, html{
+	scroll-behavior: smooth;
+    height: 100%;
+}
+
+/*map css*/
+.index-container {
+	height:100%;
+}
+
+.container {
+	
+	padding:auto;
+	
+}
+
+.container-fluid {
+	margin:0% 0% 5% 0%;
+	padding:0%;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+
+h1 {
+	font-weight : bold;
+}
+
+img {
+	width : 100%;
+	height: auto;
+	vertical-align: middle;
+}
+
+
+#subtitle {
+	color : DodgerBlue;
+	font-weight: bold;
+}
+
+#map{
+	width:100%;
+	height:100%;
+	min-height:100%;
+}
+
+#floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        line-height: 30px;
+        padding-left: 10px;
+}
+
+#detail_container {
+	margin-top : 20px;
+}
+
+#top_banner {
+	background-color: #cccccc;
+	height: 200px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	background-image : url("../img/banner.png");
+}
+/*header css */
+
+.icon-bar {
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index:5;
+}
+
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+}
+
+.icon-bar a:hover {
+  background-color: #000;
+}
+
+.chevron-up {
+  background: #3B5998;
+  color: white;
+}
+
+.exclamation-circle {
+  background: #55ACEE;
+  color: white;
+}
+
+.chevron-down {
+  background: #dd4b39;
+  color: white;
+}
+
+.git-square {
+  background: #007bb5;
+  color: white;
+}
+
+
+
+footer {
+      left: 0;
+      bottom: 0;
+      width : 100%;
+      background-color: #555;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    
+.fakeimg {
+    height: 200px;
+    background: #aaa;
+  	}
