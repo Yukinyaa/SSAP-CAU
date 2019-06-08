@@ -46,7 +46,8 @@
 
     <div class="container" id="place_reg_container">
         @model RegisterViewModel
-        <form method="post" action="go_to_action_page">
+        @using (Html.BeginForm("go_to_action_page", "go_to_action_page", FormMethod.Post))
+        {
             <div class="row">
                 <h1>Place Registration</h1>
             </div>
@@ -106,7 +107,7 @@
                 </div>
 
             </div>
-        </form>
+        }
     </div>
 </body>
 
