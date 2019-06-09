@@ -85,13 +85,13 @@ public class DatabaseWrapper
             "INSERT INTO `SSAPCAU`.`pin` (`coordlat`, `coording`, `reportcnt`, `title`, `type`, `addr`, `content`, `writer`, `password`) VALUES(" +
             2525 + "," +//coordlat   FLOAT    NOT NULL,
             2525 + "," +//coording   FLOAT    NOT NULL,
-            0 + ",`" +//reportcnt INT       NOT NULL,
-            title + "`," +//title   CHAR(30)    NOT NULL,
-            1 + ",`" +//type    INT         NOT NULL,
-            addr + "`,`" +//addr TEXT(65535),
-            cont + "`,` " +//content TEXT(65535),
-            name + "`,`" +//writer CHAR(100),
-            pw + "`" +//password CHAR(30),
+            0 + ",'" +//reportcnt INT       NOT NULL,
+            title + "'," +//title   CHAR(30)    NOT NULL,
+            1 + ",'" +//type    INT         NOT NULL,
+            addr + "','" +//addr TEXT(65535),
+            cont + "',' " +//content TEXT(65535),
+            name + "','" +//writer CHAR(100),
+            pw + "'" +//password CHAR(30),
             ");"
         );
     }
