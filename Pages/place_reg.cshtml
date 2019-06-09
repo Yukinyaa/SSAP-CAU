@@ -46,53 +46,63 @@
 
     <div class="container" id="place_reg_container">
 
-        @using (Html.BeginForm("place_reg"))
-        {
+        <form method="post" action="go_to_action_page">
             <div class="row">
-                <h1>Place Registration</h1>
+                <h1>Event Registration</h1>
             </div>
-
             <div class="form-group">
                 <div class="form-group row">
                     <label for="inputName">Name</label>
-                    <input type="text" class="form-control mx-sm-3" asp-for="inputName" placeholder="Name" />
+                    <input type="text" class="form-control mx-sm-3" id="inputName" placeholder="Name" />
 
                     <label for="inputPassword">Password</label>
-                    <input type="password" asp-for="inputPassword" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Password">
+                    <input type="password" id="inputPassword" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Password">
                     <small id="passwordHelpInline" class="text-muted">
                         Must be 8-20 characters long.
                     </small>
                 </div>
 
 
+                <div class="form-group row" id="category_row">
+
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="category1" name="category1" value="요리,식당">
+                        <label class="custom-control-label" for="category1">행사종류1</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="category2" name="category2" value="술/주점">
+                        <label class="custom-control-label" for="category2">행사종류2</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="category3" name="category3" value="유흥/오락">
+                        <label class="custom-control-label" for="category3">행사종류3</label>
+                    </div>
+
+                </div>
+
+
                 <div class="form-group row">
-                    <div class="form-group" id="category_row">
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="category1" name="category1" value="요리,식당">
-                            <label class="custom-control-label" for="category1">요리/식당</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="category2" name="category2" value="술/주점">
-                            <label class="custom-control-label" for="category2">술/주점</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="category3" name="category3" value="유흥/오락">
-                            <label class="custom-control-label" for="category3">유흥/오락</label>
-                        </div>
+                    <label for="start-datetime" class="col-2 col-form-label">Start date</label>
+                    <div class="col-10">
+                        <input class="form-control" type="datetime-local" value="2019-05-20T13:45:00" id="start-datetime">
+                    </div>
+                    <label for="end-datetime" class="col-2 col-form-label">End date</label>
+                    <div class="col-10">
+                        <input class="form-control" type="datetime-local" value="2019-06-19T13:45:00" id="end-datetime">
                     </div>
                 </div>
 
+
                 <div class="form-group row">
 
-
                     <label for="inputTitle">Title</label>
-                    <input type="text" class="form-control mx-sm-3" asp-for="inputTitle" placeholder="Title" />
+                    <input type="text" class="form-control mx-sm-3" id="inputTitle" placeholder="Title" />
 
                     <label for="inputAddress">Address</label>
-                    <input type="text" class="form-control mx-sm-3" asp-for="inputAddress" placeholder="Address" />
+                    <input type="text" class="form-control mx-sm-3" id="inputAddress" placeholder="Address" />
 
-                    <label for="inputcontext">Context</label>
-                    <textarea class="form-control mx-sm-3" asp-for="inputcontext" rows="5" placeholder="Context"></textarea>
+                    <label for="inputContext">Context</label>
+                    <textarea class="form-control mx-sm-3" id="inputcontext" rows="5" placeholder="Context"></textarea>
 
                 </div>
 
@@ -107,7 +117,7 @@
                 </div>
 
             </div>
-        }
+        </form>
         @{
             if (Request.Method.ToLower().Equals("post"))
             {
