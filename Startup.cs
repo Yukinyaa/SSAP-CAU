@@ -49,10 +49,7 @@ namespace SSAP_CAU
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseMvc(
-                routes => {;
-                    routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                });
+            app.UseMvc();
         }
     }
 }

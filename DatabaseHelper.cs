@@ -5,10 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
-    public class DatabaseWrapper
-    {
-        const string strConn = "Server=db;Port=3306;Database=SSAPCAU;Uid=ssapcau;Pwd=2019caucse;";
-        public const string strCreatePinTable =
+public class DatabaseWrapper
+{
+    const string strConn = "Server=db;Port=3306;Database=SSAPCAU;Uid=ssapcau;Pwd=2019caucse;";
+    public const string strCreatePinTable =
 @"create table pin (
     pinID   INT         AUTO_INCREMENT, 
     coordlat   FLOAT    NOT NULL,
@@ -25,14 +25,14 @@ using MySql.Data.MySqlClient;
     PRIMARY KEY (pinID)
 ) CHARACTER SET utf8";
 
-        public const string strCreateAdminTable =
+    public const string strCreateAdminTable =
 @"create table admin (
     adminID CHAR(30),
     adminPW CHAR(30),
 
     PRIMARY KEY (adminID)
 )CHARACTER SET utf8";
-        public const string strCreateReplyTable =
+    public const string strCreateReplyTable =
 @"create table reply (
     commentID   INT     AUTO_INCREMENT,
     pinID   INT,
@@ -42,40 +42,60 @@ using MySql.Data.MySqlClient;
 
     PRIMARY KEY (commentID)
 )CHARACTER SET utf8";
-        static public int SendNonQuery(string sql)
+    static public int SendNonQuery(string sql)
+    {
+        using (MySqlConnection conn = new MySqlConnection(strConn))
         {
-            using (MySqlConnection conn = new MySqlConnection(strConn))
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                return cmd.ExecuteNonQuery();
-            }
-        }
-        static public DataSet SendQuery(string sql)
-        {
-            DataSet ds = new DataSet();
-            using (MySqlConnection conn = new MySqlConnection(strConn))
-            {
-                conn.Open();
-                MySqlDataAdapter adpt = new MySqlDataAdapter(sql, conn);
-                adpt.Fill(ds, "Tab1");
-            }
-            //ds.Tables[0].Rows[0]["Name"];
-            return ds;
-        }
-        static public bool TestOpen()
-        {
-            MySqlConnection conn = new MySqlConnection(strConn);
-            try
-            {
-                conn.Open();
-                conn.Close();
-            }
-            catch (MySqlException e)
-            {
-                return false;
-            }
-            return true;
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            return cmd.ExecuteNonQuery();
         }
     }
+    static public DataSet SendQuery(string sql)
+    {
+        DataSet ds = new DataSet();
+        using (MySqlConnection conn = new MySqlConnection(strConn))
+        {
+            conn.Open();
+            MySqlDataAdapter adpt = new MySqlDataAdapter(sql, conn);
+            adpt.Fill(ds, "Tab1");
+        }
+        //ds.Tables[0].Rows[0]["Name"];
+        return ds;
+    }
+    static public bool TestOpen()
+    {
+        MySqlConnection conn = new MySqlConnection(strConn);
+        try
+        {
+            conn.Open();
+            conn.Close();
+        }
+        catch (MySqlException e)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    static public void SendPlace(string title,string addr, string cont, string name, string pw)
+    {
+        DatabaseWrapper.SendNonQuery
+        (
+            "INSERT INTO pin VALUES(" +
+            2525 + "," +//coordlat   FLOAT    NOT NULL,
+            2525 + "," +//coording   FLOAT    NOT NULL,
+            0 + "," +//reportcnt INT       NOT NULL,
+            title + ", " +//title   CHAR(30)    NOT NULL,
+            1 + "," +//type    INT         NOT NULL,
+            addr + ", " +//addr TEXT(65535),
+            cont + ", " +//content TEXT(65535),
+            name + ", " +//writer CHAR(100),
+            pw + ", " +//password CHAR(30),
+            "NULL" + "," +//startdate DATETIME,
+            "NULL" + "" +//enddate DATETIME,
+            ");"
+        );
+    }
+}
 

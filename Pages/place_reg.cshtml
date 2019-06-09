@@ -45,8 +45,8 @@
 	</div>
 
     <div class="container" id="place_reg_container">
-        @model RegisterViewModel
-        @using (Html.BeginForm("go_to_action_page", "go_to_action_page", FormMethod.Post))
+
+        @using (Html.BeginForm("place_reg"))
         {
             <div class="row">
                 <h1>Place Registration</h1>
@@ -107,6 +107,19 @@
                 </div>
 
             </div>
+        }
+        @{
+            if (Request.Method.ToLower().Equals("post"))
+            {
+                DatabaseWrapper.SendPlace(
+                    Request.Form["inputTitle"],
+                    Request.Form["inputAddress"],
+                    Request.Form["inputcontext"],
+                    Request.Form["inputName"] ,
+                    Request.Form["inputPassword"]
+                );
+                Response.Redirect("index");
+            }
         }
     </div>
 </body>
