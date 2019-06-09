@@ -108,7 +108,7 @@
             </div>
         </form>
         @{
-            if (Request.Method.ToLower().Equals("post"))
+            if (Request.Method.ToLower() == "post" )
             {
                 DatabaseWrapper.SendPlace(
                     Request.Form["inputTitle"],
