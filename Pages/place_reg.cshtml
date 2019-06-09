@@ -110,12 +110,6 @@
         @{
             if (Request.Method.ToLower() == "post" )
             {
-        <content>
-
-
-        </content>
-                try
-                {
                     DatabaseWrapper.SendPlace(
                         Request.Form["inputTitle"],
                         Request.Form["inputAddress"],
@@ -124,8 +118,6 @@
                         Request.Form["inputPassword"]
                     );
                     Response.Redirect("index");
-                }
-                catch (MySql.Data.MySqlClient.MySqlException) { }
             }
         }
     </div>
