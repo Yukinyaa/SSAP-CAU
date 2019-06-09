@@ -46,7 +46,7 @@
 
     <div class="container" id="place_reg_container">
 
-        <form method="post" action="place_reg" asp-antiforgery="false">
+        <form method="post" action="place_reg" enctype="application/x-www-form-urlencoded">
             <div class="row">
                 <h1>Place Registration</h1>
             </div>
@@ -54,10 +54,10 @@
             <div class="form-group">
                 <div class="form-group row">
                     <label for="inputName">Name</label>
-                    <input type="text" class="form-control mx-sm-3" id="inputName" placeholder="Name" />
+                    <input type="text" class="form-control mx-sm-3" name="inputName" placeholder="Name" />
 
                     <label for="inputPassword">Password</label>
-                    <input type="password" id="inputPassword" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Password">
+                    <input type="password" name="inputPassword" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Password">
                     <small id="passwordHelpInline" class="text-muted">
                         Must be 8-20 characters long.
                     </small>
@@ -85,13 +85,13 @@
 
 
                     <label for="inputTitle">Title</label>
-                    <input type="text" class="form-control mx-sm-3" id="inputTitle" placeholder="Title" />
+                    <input type="text" class="form-control mx-sm-3" name="inputTitle" placeholder="Title" />
 
                     <label for="inputAddress">Address</label>
-                    <input type="text" class="form-control mx-sm-3" id="inputAddress" placeholder="Address" />
+                    <input type="text" class="form-control mx-sm-3" name="inputAddress" placeholder="Address" />
 
                     <label for="inputContext">Context</label>
-                    <textarea class="form-control mx-sm-3" id="inputcontext" rows="5" placeholder="Context"></textarea>
+                    <textarea class="form-control mx-sm-3" name="inputcontext" rows="5" placeholder="Context"></textarea>
 
                 </div>
 
@@ -99,7 +99,7 @@
 
                     <div class="col-12 text-right">
                         <input class="btn btn-success" type="submit" value="Submit">
-                        <a class="btn btn-primary" href="index.jsp" role="button">Cancel</a>
+                        <a class="btn btn-primary" href="index" role="button">Cancel</a>
                         <input class="btn btn-primary" type="reset" value="Reset">
                     </div>
 
@@ -112,11 +112,6 @@
             {
         <content>
 
-            @Request.Form["inputTitle"]
-            @Request.Form["inputAddress"]
-            @Request.Form["inputcontext"]
-            @Request.Form["inputName"]
-            @Request.Form["inputPassword"]
 
         </content>
                 try
@@ -128,7 +123,7 @@
                         Request.Form["inputName"],
                         Request.Form["inputPassword"]
                     );
-                    //Response.Redirect("index");
+                    Response.Redirect("index");
                 }
                 catch (MySql.Data.MySqlClient.MySqlException) { }
             }
