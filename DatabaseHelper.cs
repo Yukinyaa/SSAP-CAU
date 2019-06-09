@@ -7,7 +7,8 @@ using MySql.Data.MySqlClient;
 
 public class DatabaseWrapper
 {
-    const string strConn = "Server=db;Port=3306;Database=SSAPCAU;Uid=ssapcau;Pwd=2019caucse;";
+    //const string strConn = "Server=db;Port=3306;Database=SSAPCAU;Uid=ssapcau;Pwd=2019caucse;";
+    const string strConn = "Server=omnomnomnom.mooo.com;Port=33333;Database=SSAPCAU;Uid=ssapcau;Pwd=2019caucse;CharSet=utf8;";
     public const string strCreatePinTable =
 @"create table pin (
     pinID   INT         AUTO_INCREMENT, 

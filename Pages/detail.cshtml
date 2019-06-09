@@ -1,89 +1,111 @@
 @page
 
+
 @{
     Html.RenderPartial("Shared/header.cshtml");
+    int id;
+    System.Data.DataRow pageData;
+    System.Data.DataTable comments;
+    //try
+    {
+        id = int.Parse(Request.Query["page"]);
+        pageData = DatabaseWrapper.SendQuery("select * from pin where pinID = " + id + ";").Tables[0].Rows[0];
+
+
+        if (Request.Method.ToLower() == "post")
+        {
+
+            DatabaseWrapper.SendNonQuery
+            (
+                "INSERT INTO `SSAPCAU`.`reply` (`pinID`, `writer`, `password`, `content`) VALUES(" +
+                id + ",'" +//pinID   INT,
+                Request.Form["replyName"] + "','" +//writer CHAR(100),
+                Request.Form["replyPassword"] + "','" +//password CHAR(30)
+                Request.Form["replyContents"] + "'" +//content TEXT(65535),
+                ");"
+            );
+        }
+        comments = DatabaseWrapper.SendQuery("select * from reply where pinID = " + id + ";").Tables[0];
+
+    }//catch {Response.Redirect("index");return;};
+
+
 }
 <div class="container" id="detail_container">
-	
-	<form method="post" action="detail CRUD part action">
-		<div class="form-group row">
-			<input type="hidden" name="detailId" value="DB에서 읽어온 detail 고유 ID값"/>
-			<div class="col-sm-3">
-				<img class="img-fluid" src="https://www.w3schools.com/bootstrap4/paris.jpg" class="rounded" alt="detail_img" style=""/>
-			</div>
-			
-			<div class="col-sm-9">
-				<h3>Title</h3>
-				<p>Category</p>
-				<p>Address</p>
-				<p>Start Date ~ End Date (Optional)</p>
-			</div>
-			
-		</div>
-		
-		<div class="form-group row">
-			<div class="col-sm-12">
-				<textarea class="form-control" rows="8" id="contents" style="resize:none" readonly></textarea>
-			</div> 
-		</div>
-		
-		<div class="form-group row">
-			<div class="col-12 text-right">
-				<a class="btn btn-primary" href="index.jsp" role="button">Back</a>
-				<a class="btn btn-secondary" href="#" role="button">Modify</a>
-				<a class="btn btn-success" href="#" role="button">Delete</a>
-				<a class="btn btn-danger" href="#" role="button">Report</a>
-			</div>
-		</div>
-	
-	</form>
+
+    <form method="post" action="detail CRUD part action">
+        <div class="form-group row">
+            <input type="hidden" name="detailId" value="DB에서 읽어온 detail 고유 ID값" />
+            <div class="col-sm-3">
+                <img class="img-fluid" src="https://www.w3schools.com/bootstrap4/paris.jpg" class="rounded" alt="detail_img" style="" />
+            </div>
+
+            <div class="col-sm-9">
+                <h3>@pageData["title"]</h3>
+                <p>@(pageData["type"].ToString() == "1" ? "장소" : "이벤트")</p>
+                <p>@pageData["addr"]</p>
+                <p>@(pageData["type"].ToString() == "1" ? "" : "event date")</p>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <textarea class="form-control" rows="8" id="contents" style="resize:none" readonly></textarea>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-12 text-right">
+                <a class="btn btn-primary" href="index.jsp" role="button">Back</a>
+                <a class="btn btn-secondary" href="#" role="button">Modify</a>
+                <a class="btn btn-success" href="#" role="button">Delete</a>
+                <a class="btn btn-danger" href="#" role="button">Report</a>
+            </div>
+        </div>
+
+    </form>
 </div>
 
 
-
-
 <div class="container">
-	<div class="row">
-		<table class="table">
-		    <thead class="thead-light">
-				<tr>
-					<th>Name</th>
-		        	<th>Reply</th>
-				</tr>
-		    </thead>
-			<tbody>
-				<tr>
-					<td>John</td>
-				    <td>contents11</td>
-				</tr>
-				<tr>
-					<td>Mary</td>
-					<td>Contents222</td>
-				</tr>
-				<tr>
-					<td>July</td>
-					<td>Contents333</td>
-		      	</tr>
-		    </tbody>
-		</table>
-	</div>
-	
-	<form method="post" action="reply CRUD action part">
-		<div class="form-group row">
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="replyName" placeholder="Enter Name">
-			</div>
-			<div class="col-sm-2">
-				<input type="password" class="form-control" id="replyPassword" placeholder="Enter Password">
-			</div>
-			<div class="col-sm-7">
-				<input type="text" class="form-control" id="replyContents" placeholder="Enter Reply contents"/>
-			</div>
-			<div class="col-sm-1 text-center">
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</div>
-		</div>
-	</form>
+    <div class="row">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Reply</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (System.Data.DataRow a in comments.Rows)
+                {
+                    <tr>
+                        <td>@a["writer"]</td>
+                        <td>@a["content"]</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <form method="post" action="@("detail?page="+id)">
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="replyName" placeholder="Enter Name">
+            </div>
+            <div class="col-sm-2">
+                <input type="password" class="form-control" name="replyPassword" placeholder="Enter Password">
+            </div>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="replyContents" placeholder="Enter Reply contents" />
+            </div>
+            <div class="col-sm-1 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 @{
