@@ -110,6 +110,15 @@
         @{
             if (Request.Method.ToLower() == "post" )
             {
+        <content>
+
+            @Request.Form["inputTitle"]
+            @Request.Form["inputAddress"]
+            @Request.Form["inputcontext"]
+            @Request.Form["inputName"]
+            @Request.Form["inputPassword"]
+
+        </content>
                 DatabaseWrapper.SendPlace(
                     Request.Form["inputTitle"],
                     Request.Form["inputAddress"],
